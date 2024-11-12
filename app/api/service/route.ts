@@ -46,7 +46,7 @@ export async function POST(request: Request) {
     for (const sourceIdentifier of sources) {
       // Assuming all sources are of type 'website' for simplicity
       let type = 'website';
-      if (sourceIdentifier.includes('x') || sourceIdentifier.includes('twitter')) {
+      if (sourceIdentifier.includes('x.com') || sourceIdentifier.includes('twitter.com')) {
         type = 'x';
       } else if (sourceIdentifier.includes('arxiv')) {
         type = 'arxiv';
