@@ -42,53 +42,7 @@ export async function POST(request: Request) {
       userId = existingUser.id;
     }
 
-    // Process each source
-    for (const sourceIdentifier of sources) {
-      // Assuming all sources are of type 'website' for simplicity
-      let type = 'website';
-      if (sourceIdentifier.includes('x.com') || sourceIdentifier.includes('twitter.com')) {
-        type = 'x';
-      } else if (sourceIdentifier.includes('arxiv')) {
-        type = 'arxiv';
-      }
-
-      // Check if the source already exists
-      let { data: existingSource, error: sourceError } = await supabase
-        .from('sources')
-        .select('*')
-        .eq('type', type)
-        .eq('identifier', sourceIdentifier)
-        .single();
-
-      if (sourceError && sourceError.code !== 'PGRST116') {
-        throw sourceError;
-      }
-
-      // If source doesn't exist, insert it
-      let sourceId;
-      if (!existingSource) {
-        const { data: newSource, error: insertSourceError } = await supabase
-          .from('sources')
-          .insert({ type, identifier: sourceIdentifier })
-          .select()
-          .single();
-
-        if (insertSourceError) throw insertSourceError;
-        sourceId = newSource.id;
-      } else {
-        sourceId = existingSource.id;
-      }
-
-      // Link user and source in user_sources table
-      const { error: linkError } = await supabase
-        .from('user_sources')
-        .insert({ user_id: userId, source_id: sourceId });
-
-      if (linkError && linkError.code !== '23505') {
-        // 23505: Unique violation, which is acceptable
-        throw linkError;
-      }
-    }
+  
 
     return NextResponse.json({ message: 'Data inserted successfully!' });
   } catch (error) {
