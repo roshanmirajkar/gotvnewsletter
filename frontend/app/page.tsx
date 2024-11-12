@@ -27,7 +27,7 @@ export default function Home() {
     <div className="flex flex-col items-center justify-center min-h-screen p-8 pb-20 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       {/* Header */}
       <h1 className="text-6xl font-bold mb-2">AI Newsletter ✨</h1>
-      <h2 className="text-lg mb-8">A daily AI newsletter sourced by AI agents using Firecrawl 🔥</h2>
+      <h2 className="text-lg mb-8">A daily AI newsletter sourced by AI agents & Firecrawl 🔥</h2>
       
       <form onSubmit={handleSubmit} className="flex items-center gap-4">
         {/* Email Input */}

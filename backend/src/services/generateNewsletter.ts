@@ -20,7 +20,7 @@ export async function generateNewsletter(rawStories: string) {
 The newsletter should have the following structure:
 
 Title: 'AI Newsletter – Your Quick Daily Roundup'
-Introduction: A one-sentence overview introducing the daily roundup.
+Introduction: A one-sentence overview introducing the daily roundup and the newsletter which is a daily AI newsletter sourced by AI agents & Firecrawl 🔥.
 Top X Stories: Select up to 10 most noteworthy stories, each summarized in 2-3 sentences with a clickable headline that links to the source.
 Each story summary should briefly convey:
 
