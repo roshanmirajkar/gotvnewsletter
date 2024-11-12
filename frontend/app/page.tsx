@@ -36,7 +36,7 @@ export default function Home() {
           type="email"
           id="email"
           placeholder="Enter your email"
-          className="border px-2 py-1 mr-4"
+          className="border px-4 py-2 mr-4 rounded-full h-10 sm:h-12"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
