@@ -45,7 +45,12 @@ export async function POST(request: Request) {
     // Process each source
     for (const sourceIdentifier of sources) {
       // Assuming all sources are of type 'website' for simplicity
-      const type = 'website';
+      let type = 'website';
+      if (sourceIdentifier.includes('x') || sourceIdentifier.includes('twitter')) {
+        type = 'x';
+      } else if (sourceIdentifier.includes('arxiv')) {
+        type = 'arxiv';
+      }
 
       // Check if the source already exists
       let { data: existingSource, error: sourceError } = await supabase
