@@ -89,17 +89,17 @@ export async function scrapeSources(sources: string[]) {
           });
 
           // Validate the response using the schema
-          const todayStories = JSON.parse(LLMFilterResponse.choices[0].message.content?.trim() || '{"stories": "no stories"}');
+          const todayStories = JSON.parse(LLMFilterResponse.choices[0].message.content!.trim());
           combinedText.stories.push(...todayStories.stories);
       
         } catch (error) {
           console.error('Error processing LLM response:', error);
-          const todayStories = { stories: "no stories" };
-          combinedText.stories.push(...todayStories.stories);
+        
         }
       }
     }
     }
     fs.writeFileSync('./combinedText.json', JSON.stringify(combinedText, null, 2));
-    return combinedText;
+    const rawStories = combinedText.stories;
+    return rawStories;
   }  
