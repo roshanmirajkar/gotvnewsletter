@@ -17,7 +17,7 @@ export default function Home() {
         body: JSON.stringify({ email })
       });
       const data = await response.json();
-      setApiMessage("Thank you for adding your email to the AI newsletter");
+      setApiMessage("Thank you for adding your email to the AI newsletter 🚀");
     } catch (error) {
       setApiMessage("Error calling API");
     }
@@ -49,14 +49,15 @@ export default function Home() {
         >
           Join
         </button>
-
-        {/* API Response Message */}
-        {apiMessage && (
+     
+       
+      </form>
+       {/* API Response Message */}
+       {apiMessage && (
           <p className="text-sm font-[family-name:var(--font-geist-mono)] mt-4">
             {apiMessage}
           </p>
         )}
-      </form>
     </div>
   );
 }
