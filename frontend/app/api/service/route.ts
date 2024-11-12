@@ -1,6 +1,9 @@
 // /pages/api/service.js or /app/api/service/route.js (depending on your Next.js version)
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 // Initialize Supabase client
 const supabaseUrl = process.env.SUPABASE_URL;
