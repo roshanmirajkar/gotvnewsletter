@@ -9,7 +9,7 @@ dotenv.config();
 //}
 //main();
 
-cron.schedule(`0 0 * * *`, async () => {
-  console.log(`running your task...`);
+cron.schedule(`0 12 * * *`, async () => {
+  console.log(`Generating newsletter...`);
   await handleCron();
 });
