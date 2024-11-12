@@ -9,13 +9,13 @@ dotenv.config();
 const app = new FirecrawlApp({apiKey: process.env.FIRECRAWL_API_KEY});
 const fs = require('fs');
 
-export async function generateNewsletter(rawStories: any[]) {
+export async function generateNewsletter(rawStories: string) {
 
         try {
           const client = new OpenAI();
 
-          const LLMFilterResponse = await client.chat.completions.create({
-            messages: [{ role: 'user', content: `Given a list of AI and LLM-related stories sourced from various platforms, create a concise TL;DR-style email newsletter with up to the 10 most interesting and impactful stories. Prioritize stories that cover the latest advancements, notable product launches, popular Twitter demos, influential papers, and innovations in AI technology.
+          const newsletterResponse = await client.chat.completions.create({
+            messages: [{ role: 'user', content: `Given a list of raw AI and LLM-related stories sourced from various platforms, create a concise TL;DR-style email newsletter with up to the 10 most interesting and impactful stories in HTML format. Prioritize stories that cover the popular Twitter demos, notable product launches, and innovations in AI/LLM technology.
 
 The newsletter should have the following structure:
 
@@ -32,13 +32,12 @@ Example format for each story:
 Headline: [Story Headline]
 Summary: Brief, compelling summary of the story's main points or implications.
 Link: [Insert link]
-Choose stories that demonstrate major breakthroughs, popular AI demos, practical applications, or timely insights relevant to developers, researchers, and tech enthusiasts. Make sure the language is informative but engaging, keeping the overall tone professional and friendly. ` }],
+Choose stories that demonstrate major breakthroughs, popular AI demos, practical applications, or timely insights relevant to developers, researchers, and founders. Make sure the language is informative but engaging, keeping the overall tone professional and friendly. Do not include any stories that are not in raw stories or are not AI or LLM related. Ensure the newsletter is formatted in HTML. Do not include \`\`\`html or \`\`\` in the newsletter.  \n\nHere is the raw stories: ${rawStories}` }],
             model: 'gpt-4o',
           });
 
-     
-  
-      
+          return newsletterResponse.choices[0].message.content;
+    
         } catch (error) {
           console.log("error generating newsletter")
       
