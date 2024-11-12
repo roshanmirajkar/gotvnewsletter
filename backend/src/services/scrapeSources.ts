@@ -99,7 +99,7 @@ export async function scrapeSources(sources: string[]) {
       }
     }
     }
-    fs.writeFileSync('./combinedText.json', JSON.stringify(combinedText, null, 2));
+    //fs.writeFileSync('./combinedText.json', JSON.stringify(combinedText, null, 2));
     const rawStories = combinedText.stories;
     return rawStories;
   }  

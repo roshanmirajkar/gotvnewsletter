@@ -43,7 +43,7 @@ export async function sendNewsletter(newsletter: string) {
 
             start += batchSize;
           }
-          return "success";
+          return "Success sending newsletter on " + new Date().toISOString();
         } catch (error) {
           console.log("error generating newsletter")
       

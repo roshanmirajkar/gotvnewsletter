@@ -4,13 +4,12 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-async function main() {
-  console.log('starting...');
+//async function main() {
+//  console.log('starting...');
+//}
+//main();
+
+cron.schedule(`0 0 * * *`, async () => {
+  console.log(`running your task...`);
   await handleCron();
-}
-
-main();
-
-// cron.schedule(`*/1 * * * *`, async () => {
-//   console.log(`running your task...`);
-// });
+});

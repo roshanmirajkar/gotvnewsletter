@@ -6,9 +6,9 @@ import fs from 'fs';
 export const handleCron = async (): Promise<void> => {
   try {
    
-    //const cronSources = await getCronSources();
-    //const rawStories = await scrapeSources(cronSources).toString();
-    const rawStories = fs.readFileSync('./combinedText.json', 'utf8').toString();
+    const cronSources = await getCronSources();
+    const rawStories = await scrapeSources(cronSources).toString();
+    //const rawStories = fs.readFileSync('./combinedText.json', 'utf8').toString();
     const newsletter = await generateNewsletter(rawStories);
     const result = await sendNewsletter(newsletter!);
     console.log(result);
