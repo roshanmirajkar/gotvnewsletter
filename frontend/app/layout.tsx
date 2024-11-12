@@ -14,7 +14,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "AI Newsletter",
+  title: "AGI News",
   description: "A daily AI newsletter sourced by AI agents & Firecrawl 🔥",
 };
 

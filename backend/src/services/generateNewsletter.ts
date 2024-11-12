@@ -15,11 +15,11 @@ export async function generateNewsletter(rawStories: string) {
           const client = new OpenAI();
 
           const newsletterResponse = await client.chat.completions.create({
-            messages: [{ role: 'user', content: `Given a list of raw AI and LLM-related stories sourced from various platforms, create a concise TL;DR-style email newsletter with up to the 10 most interesting and impactful stories in HTML format. Prioritize stories that cover the popular Twitter demos, notable product launches, and innovations in AI/LLM technology.
+            messages: [{ role: 'user', content: `Given a list of raw AI and LLM-related stories sourced from various platforms, create a concise TL;DR-style email newsletter called 'AGI News' with up to the 10 most interesting and impactful stories in HTML format. Prioritize stories that cover the popular Twitter demos, notable product launches, and innovations in AI/LLM technology.
 
 The newsletter should have the following structure:
 
-Title: 'AI Newsletter – Your Quick Daily Roundup'
+Title: 'AGI News – Your Quick Daily Roundup'
 Introduction: A one-sentence overview introducing the daily roundup and the newsletter which is a daily AI newsletter sourced by AI agents & Firecrawl 🔥.
 Top X Stories: Select up to 10 most noteworthy stories, each summarized in 2-3 sentences with a clickable headline that links to the source.
 Each story summary should briefly convey:

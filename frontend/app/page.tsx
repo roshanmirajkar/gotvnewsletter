@@ -17,7 +17,7 @@ export default function Home() {
         body: JSON.stringify({ email })
       });
       const data = await response.json();
-      setApiMessage("Thank you for adding your email to the AI newsletter 🚀");
+      setApiMessage("Thank you for adding your email to AGI News 🚀");
     } catch (error) {
       setApiMessage("Error calling API");
     }
@@ -26,7 +26,7 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-8 pb-20 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       {/* Header */}
-      <h1 className="text-6xl font-bold mb-2">AI Newsletter ✨</h1>
+      <h1 className="text-6xl font-bold mb-2">AGI News ✨</h1>
       <h2 className="text-lg mb-8">A daily AI newsletter sourced by AI agents & Firecrawl 🔥</h2>
       
       <form onSubmit={handleSubmit} className="flex items-center gap-4">

@@ -40,7 +40,7 @@ export async function sendNewsletter(newsletter: string) {
         await resend.emails.send({
           from: 'Eric <eric@tryfirecrawl.com>',
           to: emails,
-          subject: 'Today in AI & LLMs – Your Quick Daily Roundup',
+          subject: 'AGI News – Your Quick Daily Roundup',
           html: newsletter,
         });
       }
