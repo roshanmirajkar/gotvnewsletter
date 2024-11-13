@@ -24,15 +24,15 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-8 pb-20 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="flex flex-col items-center justify-center min-h-screen p-8 pb-20 sm:p-20 font-[family-name:var(--font-geist-sans)] relative">
       {/* Header */}
       <h1 className="text-6xl font-bold mb-2">AGI News ✨</h1>
-      <h2 className="text-lg mb-8">A daily AI newsletter sourced by AI agents & Firecrawl 🔥</h2>
+      <h2 className="text-lg mb-8">A daily AI newsletter that's completely sourced by autonomous AI agents.</h2>
       
       <form onSubmit={handleSubmit} className="flex items-center gap-4">
         {/* Email Input */}
        
-        <input
+        <input 
           type="email"
           id="email"
           placeholder="Enter your email"
@@ -58,6 +58,10 @@ export default function Home() {
             {apiMessage}
           </p>
         )}
+      {/* Footer */}
+      <h2 className="absolute bottom-4 text-sm ">
+        This is an <a href="https://github.com/ericciarla/aginews" target="_blank" rel="noopener noreferrer">open source project</a> built with AI Agents, <a href="https://resend.com" target="_blank" rel="noopener noreferrer">Resend</a>, and <a href="https://firecrawl.dev" target="_blank" rel="noopener noreferrer">Firecrawl 🔥</a>
+      </h2>
     </div>
   );
 }

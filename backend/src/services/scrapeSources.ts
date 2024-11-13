@@ -31,7 +31,7 @@ export async function scrapeSources(sources: string[]) {
             const encodedQuery = encodeURIComponent(query);
           
             // Encode the start time
-            const startTime = new Date(Date.now() - 28 * 60 * 60 * 1000).toISOString();
+            const startTime = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
             const encodedStartTime = encodeURIComponent(startTime);
           
             // Corrected API URL with encoded parameters to get tweets and attachments
@@ -59,7 +59,8 @@ export async function scrapeSources(sources: string[]) {
                 const stories = tweets.data.map((tweet: any) => {
                   return {
                     headline: tweet.text,
-                    link: `https://x.com/i/status/${tweet.id}`
+                    link: `https://x.com/i/status/${tweet.id}`,
+                    date_posted: startTime
                   };
                 });
                 combinedText.stories.push(...stories);
@@ -86,7 +87,7 @@ export async function scrapeSources(sources: string[]) {
           const client = new OpenAI();
 
           const LLMFilterResponse = await client.chat.completions.create({
-            messages: [{ role: 'user', content: `Today is ${new Date().toLocaleDateString()}. Return only today's AI or LLM related story or post headlines and links in JSON format from the following scraped content. The format should be {"stories": [{"headline": "headline1", "link": "link1"}, {"headline": "headline2", "link": "link2"}, ...]}. If there are no stories or posts related to AI or LLMs from today, return {"stories": []}. The source link is ${source}. If the story or post link is not absolute, make it absolute with the source link. RETURN ONLY JSON IN THE SPECIFIED FORMAT DO NOT INCLUDE MARKDOWN OR ANY OTHER TEXT JUST THE PURE JSON. Do not include \`\`\`json or \`\`\` or any other markdown formatting. Scraped Content:\n\n\n${scrapeResponse.markdown} JSON:` }],
+            messages: [{ role: 'user', content: `Today is ${new Date().toLocaleDateString()}. Return only today's AI or LLM related story or post headlines and links in JSON format from the following scraped content. They must be posted today. The format should be {"stories": [{"headline": "headline1", "link": "link1", "date_posted": "date1"}, {"headline": "headline2", "link": "link2", "date_posted": "date2"}, ...]}. If there are no stories or posts related to AI or LLMs from today, return {"stories": []}. The source link is ${source}. If the story or post link is not absolute, make it absolute with the source link. RETURN ONLY JSON IN THE SPECIFIED FORMAT DO NOT INCLUDE MARKDOWN OR ANY OTHER TEXT JUST THE PURE JSON. Do not include \`\`\`json or \`\`\` or any other markdown formatting. Scraped Content:\n\n\n${scrapeResponse.markdown} JSON:` }],
             model: 'gpt-4o',
           });
 

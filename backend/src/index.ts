@@ -5,12 +5,12 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 //async function main() {
-//  console.log(`Generating newsletter...`);
+//  console.log(`Starting process to send newsletter...`);
 //  await handleCron();
 //}
 //main();
 
-cron.schedule(`0 12 * * *`, async () => {
-  console.log(`Generating newsletter...`);
+cron.schedule(`0 14 * * *`, async () => {
+  console.log(`Starting process to send newsletter...`);
   await handleCron();
 });
