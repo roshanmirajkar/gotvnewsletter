@@ -7,10 +7,11 @@ export const handleCron = async (): Promise<void> => {
   try {
    
     const cronSources = await getCronSources();
-    const rawStories = await scrapeSources(cronSources).toString();
+    const rawStories = await scrapeSources(cronSources);
     //const rawStories = fs.readFileSync('./combinedText.json', 'utf8').toString();
-    const newsletter = await generateNewsletter(rawStories);
-    const result = await sendNewsletter(newsletter!);
+    const rawStoriesString = JSON.stringify(rawStories);
+    const newsletter = await generateNewsletter(rawStoriesString);
+    const result = await sendNewsletter(newsletter!, rawStoriesString);
     console.log(result);
   } catch (error) {
     console.error(error);

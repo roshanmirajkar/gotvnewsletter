@@ -8,9 +8,12 @@ dotenv.config();
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 
-export async function sendNewsletter(newsletter: string) {
+export async function sendNewsletter(newsletter: string, rawStories: string) {
   if (newsletter.length <= 750) {
-    console.log("Newsletter is too short to send.");
+    console.log("Newsletter is too short to send. See newsletter below:");
+    console.log(newsletter);
+    console.log("Raw stories below:");
+    console.log(rawStories);
     return "Newsletter not sent due to insufficient length.";
   }
 

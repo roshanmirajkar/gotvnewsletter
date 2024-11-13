@@ -4,12 +4,13 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-//async function main() {
-//  console.log('starting...');
-//}
-//main();
-
-cron.schedule(`0 12 * * *`, async () => {
+async function main() {
   console.log(`Generating newsletter...`);
   await handleCron();
-});
+}
+main();
+
+//cron.schedule(`0 12 * * *`, async () => {
+//  console.log(`Generating newsletter...`);
+//  await handleCron();
+//});

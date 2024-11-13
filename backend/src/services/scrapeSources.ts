@@ -10,7 +10,9 @@ const app = new FirecrawlApp({apiKey: process.env.FIRECRAWL_API_KEY});
 const fs = require('fs');
 
 export async function scrapeSources(sources: string[]) {
-    console.log(sources);
+  const num_sources = sources.length;
+    console.log(`Scraping ${num_sources} sources...`)
+
     let combinedText: { stories: any[] } = { stories: [] };
     const useTwitter = true;
     const useScrape = true;
@@ -29,7 +31,7 @@ export async function scrapeSources(sources: string[]) {
             const encodedQuery = encodeURIComponent(query);
           
             // Encode the start time
-            const startTime = new Date(Date.now() - 36 * 60 * 60 * 1000).toISOString();
+            const startTime = new Date(Date.now() - 28 * 60 * 60 * 1000).toISOString();
             const encodedStartTime = encodeURIComponent(startTime);
           
             // Corrected API URL with encoded parameters to get tweets and attachments
@@ -90,6 +92,7 @@ export async function scrapeSources(sources: string[]) {
 
           // Validate the response using the schema
           const todayStories = JSON.parse(LLMFilterResponse.choices[0].message.content!.trim());
+          console.log(`Found ${todayStories.stories.length} stories from ${source}`)
           combinedText.stories.push(...todayStories.stories);
       
         } catch (error) {
