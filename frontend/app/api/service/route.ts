@@ -2,6 +2,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
+import { Resend } from 'resend';
 
 dotenv.config();
 
@@ -42,9 +43,16 @@ export async function POST(request: Request) {
       userId = existingUser.id;
     }
 
-  
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
-    return NextResponse.json({ message: 'Data inserted successfully!' });
+    const data = await resend.emails.send({
+      from: 'eric@tryfirecrawl.com',
+      to: email,
+      subject: 'Hello from AGI News',
+      text: 'Congratulations! You have successfully subscribed to AGI News. We will send you a daily email with the latest news in AI starting tomorrow.',
+    });
+
+    return NextResponse.json({ message: 'Data inserted successfully and email sent!' });
   } catch (error) {
     console.error(error);
     if (error instanceof Error) {

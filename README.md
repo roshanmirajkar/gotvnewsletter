@@ -37,6 +37,7 @@ Create a `.env` file with the following variables:
 ```env
 SUPABASE_URL=
 SUPABASE_SECRET_KEY=
+RESEND_API_KEY=
 ```
 
 Start the development server:
