@@ -37,12 +37,10 @@ export async function sendNewsletter(newsletter: string, rawStories: string) {
         hasMore = false;
       }
 
-      const emails = subscribers.map(subscriber => subscriber.email);
-
-      if (emails.length > 0) {
+      for (const subscriber of subscribers) {
         await resend.emails.send({
           from: 'Eric <eric@tryfirecrawl.com>',
-          to: emails,
+          to: subscriber.email,
           subject: 'AGI News – Your Quick Daily Roundup',
           html: newsletter,
         });
