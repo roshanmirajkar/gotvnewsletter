@@ -37,12 +37,15 @@ export async function sendNewsletter(newsletter: string, rawStories: string) {
         hasMore = false;
       }
 
+      
+
       for (const subscriber of subscribers) {
+        const unsubscribe_link = `${process.env.NEXT_PUBLIC_URL}/api/unsubscribe?email=${subscriber.email}`;
         await resend.emails.send({
           from: 'Eric <eric@tryfirecrawl.com>',
           to: subscriber.email,
           subject: 'AGI News – Your Quick Daily Roundup',
-          html: newsletter,
+          html: newsletter + `<br><br><a href="${unsubscribe_link}">Unsubscribe</a>`,
         });
       }
 
