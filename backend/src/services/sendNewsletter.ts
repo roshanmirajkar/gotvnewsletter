@@ -40,7 +40,7 @@ export async function sendNewsletter(newsletter: string, rawStories: string) {
       
 
       for (const subscriber of subscribers) {
-        const unsubscribe_link = `${process.env.NEXT_PUBLIC_URL}/api/unsubscribe?email=${subscriber.email}`;
+        const unsubscribe_link = `https://www.aginews.io/api/unsubscribe?email=${subscriber.email}`;
         await resend.emails.send({
           from: 'Eric <eric@tryfirecrawl.com>',
           to: subscriber.email,
