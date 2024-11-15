@@ -27,6 +27,7 @@ export async function sendNewsletter(newsletter: string, rawStories: string) {
       const { data: subscribers, error } = await supabase
         .from('users')
         .select('email')
+        .in('email', ['eric@sideguide.dev', 'ericpciarla@gmail.com'])
         .range(start, start + batchSize - 1);
 
       if (error) {
@@ -37,16 +38,18 @@ export async function sendNewsletter(newsletter: string, rawStories: string) {
         hasMore = false;
       }
 
-      
+      console.log(`Sending newsletter to ${subscribers.length} subscribers`);
 
       for (const subscriber of subscribers) {
         const unsubscribe_link = `https://www.aginews.io/api/unsubscribe?email=${subscriber.email}`;
+       
         await resend.emails.send({
           from: 'Eric <eric@tryfirecrawl.com>',
           to: subscriber.email,
           subject: 'AGI News – Your Quick Daily Roundup',
           html: newsletter + `<br><br><a href="${unsubscribe_link}">Unsubscribe</a>`,
         });
+        
       }
 
       start += batchSize;

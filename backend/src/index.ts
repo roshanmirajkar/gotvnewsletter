@@ -8,7 +8,7 @@ dotenv.config();
 //  console.log(`Starting process to send newsletter...`);
 //  await handleCron();
 //}
-//main();
+// main();
 
 cron.schedule(`0 14 * * *`, async () => {
   console.log(`Starting process to send newsletter...`);
