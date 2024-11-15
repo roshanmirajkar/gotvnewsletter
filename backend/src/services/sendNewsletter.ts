@@ -27,7 +27,6 @@ export async function sendNewsletter(newsletter: string, rawStories: string) {
       const { data: subscribers, error } = await supabase
         .from('users')
         .select('email')
-        .in('email', ['eric@sideguide.dev', 'ericpciarla@gmail.com'])
         .range(start, start + batchSize - 1);
 
       if (error) {
