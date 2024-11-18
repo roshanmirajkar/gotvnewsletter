@@ -87,14 +87,15 @@ export async function scrapeSources(sources: string[]) {
           const client = new OpenAI();
 
           const LLMFilterResponse = await client.chat.completions.create({
-            messages: [{ role: 'user', content: `Today is ${new Date().toLocaleDateString()}. Return only today's AI or LLM related story or post headlines and links in JSON format from the following scraped content. They must be posted today. The format should be {"stories": [{"headline": "headline1", "link": "link1", "date_posted": "date1"}, {"headline": "headline2", "link": "link2", "date_posted": "date2"}, ...]}. If there are no stories or posts related to AI or LLMs from today, return {"stories": []}. The source link is ${source}. If the story or post link is not absolute, make it absolute with the source link. RETURN ONLY JSON IN THE SPECIFIED FORMAT DO NOT INCLUDE MARKDOWN OR ANY OTHER TEXT JUST THE PURE JSON. Do not include \`\`\`json or \`\`\` or any other markdown formatting. Scraped Content:\n\n\n${scrapeResponse.markdown} JSON:` }],
+            messages: [{ role: 'user', content: `Today is ${new Date().toLocaleDateString()}. Return story or post headlines and links in JSON format from the following scraped content. The format should be {"stories": [{"headline": "headline1", "link": "link1", "date_posted": "date1"}, {"headline": "headline2", "link": "link2", "date_posted": "date2"}, ...]}. The source link is ${source}. If the story or post link is not absolute, make it absolute with the source link. RETURN ONLY JSON IN THE SPECIFIED FORMAT DO NOT INCLUDE MARKDOWN OR ANY OTHER TEXT JUST THE PURE JSON. Do not include \`\`\`json or \`\`\` or any other markdown formatting. Scraped Content:\n\n\n${scrapeResponse.markdown} JSON:` }],
             model: 'gpt-4o',
           });
 
           // Validate the response using the schema
           const todayStories = JSON.parse(LLMFilterResponse.choices[0].message.content!.trim());
-          console.log(`Found ${todayStories.stories.length} stories from ${source}`)
-          combinedText.stories.push(...todayStories.stories);
+          const limitedStories = todayStories.stories.slice(0, 5); // Limit to top 5 stories
+          console.log(`Found ${limitedStories.length} stories from ${source}`);
+          combinedText.stories.push(...limitedStories);
       
         } catch (error) {
           console.error('Error processing LLM response:', error);

@@ -7,7 +7,6 @@ dotenv.config();
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-
 export async function sendNewsletter(newsletter: string, rawStories: string) {
   if (newsletter.length <= 750) {
     console.log("Newsletter is too short to send. See newsletter below:");
@@ -43,9 +42,9 @@ export async function sendNewsletter(newsletter: string, rawStories: string) {
         const unsubscribe_link = `https://www.aginews.io/api/unsubscribe?email=${subscriber.email}`;
        
         await resend.emails.send({
-          from: 'Eric <eric@tryfirecrawl.com>',
+          from: 'GOTV <geeks@geeksofthevalley.com>',
           to: subscriber.email,
-          subject: 'AGI News – Your Quick Daily Roundup',
+          subject: 'Geeks of the Valley – Venture Insights Now',
           html: newsletter + `<br><br><a href="${unsubscribe_link}">Unsubscribe</a>`,
         });
         
@@ -55,6 +54,6 @@ export async function sendNewsletter(newsletter: string, rawStories: string) {
     }
     return "Success sending newsletter on " + new Date().toISOString();
   } catch (error) {
-    console.log("error generating newsletter");
+    console.log(" SEND ERROR generating newsletter");
   }
 }

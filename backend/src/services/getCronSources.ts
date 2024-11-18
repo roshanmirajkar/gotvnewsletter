@@ -9,12 +9,12 @@ export async function getCronSources() {
   console.log("Fetching sources...")
     const { data: sources, error } = await supabase
       .from('sources')
-      .select('identifier');
+      .select('url');
 
     if (error) {
       throw new Error(`Failed to fetch sources: ${error.message}`);
     }
 
-    return sources.map(source => source.identifier);
+    return sources.map(source => source.url);
 }
   
